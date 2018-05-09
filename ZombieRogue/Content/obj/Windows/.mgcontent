@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Idle/00.png</File>
+    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Punch/00.png</File>
+    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Slam/00.png</File>
+    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Swing/00.png</File>
+    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Uppercut/00.png</File>
+    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Walking/00.png</File>
+    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Branding/YD_Logo.png</File>
+    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Environment/Backgrounds/00.png</File>
+  </SourceFiles>
+</SourceFileCollection>
