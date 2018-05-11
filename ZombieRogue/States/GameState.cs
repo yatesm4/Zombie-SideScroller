@@ -27,7 +27,7 @@ namespace ZombieRogue.States
             _currentMap = new Map(content, graphicsDevice);
 
             _camera = new Camera(graphicsDevice);
-            _camera.Zoom = 1.5f;
+            _camera.Zoom = 2.45f;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -45,7 +45,7 @@ namespace ZombieRogue.States
             // post update game state
             _currentMap.Update(gameTime);
             _camera.Update(gameTime);
-            _camera.Position = _currentMap.Player.Position;
+            _camera.Position = new Vector2(_currentMap.Player.Position.X, _currentMap.BackgroundRect.Y + 100);
         }
 
         public override void Update(GameTime gameTime)

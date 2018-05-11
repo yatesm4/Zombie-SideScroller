@@ -15,6 +15,8 @@ namespace ZombieRogue.Objects
 {
     public abstract class Character
     {
+        public ContentManager Content; 
+
         public Animation Spr_Idle;
         public Animation Spr_Walk;
         public Animation Spr_Punch;
@@ -56,6 +58,7 @@ namespace ZombieRogue.Objects
 
         public Character(ContentManager content, Vector2 position, int[] skin_args)
         {
+            Content = content;
             LoadContent(content, skin_args);
             Reset(position);
         }
@@ -64,10 +67,10 @@ namespace ZombieRogue.Objects
         {
             Spr_Idle = new Animation(content.Load<Texture2D>($"Sprites/Characters/Idle/0{skin_args[0]}"), 0.075f, true);
             Spr_Walk = new Animation(content.Load<Texture2D>($"Sprites/Characters/Walking/0{skin_args[1]}"), 0.075f, true);
-            Spr_Punch = new Animation(content.Load<Texture2D>($"Sprites/Characters/Punch/0{skin_args[2]}"), 0.075f, true);
-            Spr_Swing = new Animation(content.Load<Texture2D>($"Sprites/Characters/Swing/0{skin_args[3]}"), 0.075f, true);
-            Spr_Slam = new Animation(content.Load<Texture2D>($"Sprites/Characters/Slam/0{skin_args[4]}"), 0.075f, true);
-            Spr_Uppercut = new Animation(content.Load<Texture2D>($"Sprites/Characters/Uppercut/0{skin_args[5]}"), 0.075f, true);
+            Spr_Punch = new Animation(content.Load<Texture2D>($"Sprites/Characters/Punch/0{skin_args[2]}"), 0.1f, true);
+            Spr_Swing = new Animation(content.Load<Texture2D>($"Sprites/Characters/Swing/0{skin_args[3]}"), 0.15f, true);
+            Spr_Slam = new Animation(content.Load<Texture2D>($"Sprites/Characters/Slam/0{skin_args[4]}"), 0.15f, true);
+            Spr_Uppercut = new Animation(content.Load<Texture2D>($"Sprites/Characters/Uppercut/0{skin_args[5]}"), 0.3f, true);
 
             int width = (int)(Spr_Idle.FrameWidth * 0.4);
             int left = (Spr_Idle.FrameWidth - width) / 2;
@@ -83,8 +86,9 @@ namespace ZombieRogue.Objects
             Sprite.PlayAnimation(Spr_Idle);
         }
 
-        public abstract void Update(GameTime gameTime, KeyboardState keyboardState);
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public abstract void Update(GameTime gameTime, KeyboardState keyboardState, Map map);
+
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Sprite.Draw(gameTime, spriteBatch, Position, IsFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
         }

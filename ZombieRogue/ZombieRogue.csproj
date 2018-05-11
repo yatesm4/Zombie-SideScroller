@@ -42,6 +42,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GameInstance.cs" />
+    <Compile Include="Items\Hammer.cs" />
+    <Compile Include="Items\Projectile.cs" />
+    <Compile Include="Items\ReturningProjectile.cs" />
+    <Compile Include="Items\Weapon.cs" />
     <Compile Include="Objects\Animation.cs" />
     <Compile Include="Objects\AnimationPlayer.cs" />
     <Compile Include="Objects\Character.cs" />
