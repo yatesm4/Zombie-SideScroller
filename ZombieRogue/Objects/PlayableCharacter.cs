@@ -35,6 +35,8 @@ namespace ZombieRogue.Objects
 
         public List<Projectile> Projectiles;
 
+        public Map CurrentMapState;
+
         //===========================================================================
         // State (Mouse and Keyboard) Variables
         //===========================================================================
@@ -53,6 +55,8 @@ namespace ZombieRogue.Objects
 
         public override void Update(GameTime gameTime, KeyboardState keyboardState, Map map)
         {
+            CurrentMapState = map;
+
             if(IsAttacking.Equals(false))
             {
                 MovementInput(keyboardState);
@@ -186,7 +190,9 @@ namespace ZombieRogue.Objects
                         CurrentWeapon.Sprite.PlayAnimation(CurrentWeapon.Spr_Swing_Throw);
                         ReturningProjectile p = new ReturningProjectile(Content, Position - new Vector2(0, 32), "Mjolnir", new int[] { 0 }, new Vector2(PreviousDirection, 0))
                         {
-                            IsFlipped = this.IsFlipped
+                            GraphDevice = this.GraphDevice,
+                            IsFlipped = this.IsFlipped,
+                            Entities = CurrentMapState.NPCs
                         };
                         Projectiles.Add(p);
                         p.Returned += delegate

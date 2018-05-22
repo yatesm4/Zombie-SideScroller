@@ -16,6 +16,8 @@ namespace ZombieRogue.Items
 {
     public class ReturningProjectile : Projectile
     {
+        public GraphicsDevice GraphDevice;
+
         public bool IsReturning = false;
 
         public event EventHandler Returned;
@@ -26,6 +28,35 @@ namespace ZombieRogue.Items
         public Vector2 Origin;
         public float Radius;
         public double Angle;
+
+        public List<NonPlayableCharacter> Entities = new List<NonPlayableCharacter>();
+
+        public Rectangle Hitbox
+        {
+            get
+            {
+                return new Rectangle((int)Position.X - 16, (int)Position.Y - 16, 16, 16);
+            }
+        }
+
+        public Rectangle RotatedHitbox
+        {
+            get
+            {
+                var x1 = (Position.X * Math.Cos(Sprite.Rotation)) - (Position.Y * Math.Sin(Sprite.Rotation));
+                var y1 = (Position.X * Math.Sin(Sprite.Rotation)) + (Position.Y * Math.Cos(Sprite.Rotation));
+
+                var x2 = (((Position.X + 16) * Math.Cos(Sprite.Rotation)) -
+                          ((Position.Y + 16) * Math.Sin(Sprite.Rotation)));
+
+                var y2 = (((Position.X + 16) * Math.Sin(Sprite.Rotation)) +
+                          ((Position.Y + 16) * Math.Cos(Sprite.Rotation)));
+
+                return new Rectangle(Convert.ToInt32(x1), Convert.ToInt32(y1), Convert.ToInt32(x2), Convert.ToInt32(y2));
+            }
+        }
+
+        public Vector2 HitboxOrigin = new Vector2(8, 24);
 
         public ReturningProjectile(ContentManager content, Vector2 position, string weapon_name, int[] skin_args, Vector2 direction) : base(content, position, weapon_name, skin_args, direction)
         {
@@ -83,6 +114,14 @@ namespace ZombieRogue.Items
                         }
                     }
                 }
+
+                foreach (var e in Entities)
+                {
+                    if (e.Hitbox.Intersects(Hitbox))
+                    {
+                        Console.WriteLine("Intersected with NPC");
+                    }
+                }
             }
         }
 
@@ -91,17 +130,20 @@ namespace ZombieRogue.Items
             return Vector2.Transform(point - origin, Matrix.CreateRotationZ(rotation)) + origin;
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (IsDestroyed.Equals(false))
             {
                 if (IsReturned.Equals(false))
                 {
                     Sprite.Draw(gameTime, spriteBatch, Position, IsFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+
+                    // Draw projectile hitbox
+                    DrawDebugRect(Hitbox, Color.Red, spriteBatch);
                 }
                 else
                 {
-                    Console.WriteLine("Not drawing projectile");
+                    //Console.WriteLine("Not drawing projectile");
                 }
             }
         }
@@ -117,6 +159,17 @@ namespace ZombieRogue.Items
 
             Console.WriteLine("DEBUG: Destroyed projectile");
             IsDestroyed = true;
+        }
+
+        public void DrawDebugRect(Rectangle coords, Color color, SpriteBatch spriteBatch)
+        {
+            //Console.WriteLine("Drawing debug rect");
+
+            var Debug_Rect = new Texture2D(GraphDevice, 1, 1);
+            Debug_Rect.SetData(new[] { Color.Red });
+
+            //spriteBatch.Draw(Debug_Rect, coords, new Color(color, 0.25f));
+            spriteBatch.Draw(Debug_Rect, new Vector2(Position.X, Position.Y), coords, new Color(color, 0.25f), Sprite.Rotation, HitboxOrigin, 1.0f, SpriteEffects.None, 0.0f);
         }
     }
 }

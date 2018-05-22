@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Slam/00.png</SourceFile>
-  <SourceTime>2018-05-09T19:48:44.7317391-04:00</SourceTime>
-  <DestFile>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/bin/Windows/Sprites/Characters/Slam/00.xnb</DestFile>
-  <DestTime>2018-05-09T19:54:33.9211538-04:00</DestTime>
+  <SourceFile>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Slam/00.png</SourceFile>
+  <SourceTime>2018-05-09T12:00:16.6441834-04:00</SourceTime>
+  <DestFile>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/bin/Windows/Sprites/Characters/Slam/00.xnb</DestFile>
+  <DestTime>2018-05-22T13:26:12.2035711-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:05:36-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

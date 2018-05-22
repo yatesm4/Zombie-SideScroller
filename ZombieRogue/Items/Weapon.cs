@@ -48,7 +48,7 @@ namespace ZombieRogue.Items
 
         public abstract void Update(GameTime gameTime, KeyboardState keyboardState, Character owner);
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Sprite.Draw(gameTime, spriteBatch, Position, IsFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
         }

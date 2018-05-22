@@ -39,9 +39,19 @@ namespace ZombieRogue.Objects
 
             BackgroundRect = new Rectangle(new Point((int)_backgroundPosition.X, (int)_backgroundPosition.Y), new Point(_background.Width, _background.Height));
 
-            Player = new PlayableCharacter(content, new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2), BackgroundRect.Y + 200), new int[] { 0, 0, 0, 0, 0, 0 });
+            Player = new PlayableCharacter(content,
+                new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2), BackgroundRect.Y + 200),
+                new int[] {0, 0, 0, 0, 0, 0})
+            {
+                GraphDevice = graphicsDevice,
+                IsDebugging = true
+            };
 
-            NPCs.Add(new NonPlayableCharacter(content, new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2) + 80, BackgroundRect.Y + 200), new int[] { 1, 1, 0, 0, 0, 0 }));
+            NPCs.Add(new NonPlayableCharacter(content, new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2) + 80, BackgroundRect.Y + 200), new int[] { 1, 1, 0, 0, 0, 0 })
+            {
+                GraphDevice = graphicsDevice,
+                IsDebugging = true
+            });
         }
 
         public void Update(GameTime gameTime)

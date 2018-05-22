@@ -15,7 +15,8 @@ namespace ZombieRogue.Objects
 {
     public abstract class Character
     {
-        public ContentManager Content; 
+        public ContentManager Content;
+        public GraphicsDevice GraphDevice;
 
         public Animation Spr_Idle;
         public Animation Spr_Walk;
@@ -25,6 +26,9 @@ namespace ZombieRogue.Objects
         public Animation Spr_Uppercut;
 
         public AnimationPlayer Sprite;
+
+        public static Texture2D Debug_Rect;
+        public bool IsDebugging = false;
 
         public Vector2 Position { get; set; }
         public int Depth
@@ -55,6 +59,14 @@ namespace ZombieRogue.Objects
         public const float AccelerometerScale = 1.5f;
 
         public Rectangle localBounds;
+
+        public Rectangle Hitbox
+        {
+            get
+            {
+                return new Rectangle((int)Position.X - (localBounds.Width / 2), (int)Position.Y - localBounds.Height, localBounds.Width, localBounds.Height - (localBounds.Height / 4));
+            }
+        }
 
         public Character(ContentManager content, Vector2 position, int[] skin_args)
         {
@@ -91,6 +103,26 @@ namespace ZombieRogue.Objects
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Sprite.Draw(gameTime, spriteBatch, Position, IsFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+
+            /**
+             * DEBUG - DRAW HITBOX
+             */
+
+            if (IsDebugging.Equals(true))
+            {
+                // draw characters hitbox
+                DrawDebugRect(Hitbox, Color.Red, spriteBatch);
+            }
+        }
+
+        public void DrawDebugRect(Rectangle coords, Color color, SpriteBatch spriteBatch)
+        {
+            //Console.WriteLine("Drawing debug rect");
+
+            Debug_Rect = new Texture2D(GraphDevice, 1, 1);
+            Debug_Rect.SetData(new[] { Color.Red });
+
+            spriteBatch.Draw(Debug_Rect, coords, new Color(color, 0.25f));
         }
     }
 }
