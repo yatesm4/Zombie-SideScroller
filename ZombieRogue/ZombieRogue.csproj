@@ -50,6 +50,7 @@
     <Compile Include="Objects\AnimationPlayer.cs" />
     <Compile Include="Objects\Character.cs" />
     <Compile Include="Objects\Map.cs" />
+    <Compile Include="Objects\NonPlayableCharacter.cs" />
     <Compile Include="Objects\PlayableCharacter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

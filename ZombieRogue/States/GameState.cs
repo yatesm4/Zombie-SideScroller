@@ -43,9 +43,21 @@ namespace ZombieRogue.States
         public override void PostUpdate(GameTime gameTime)
         {
             // post update game state
-            _currentMap.Update(gameTime);
+            Vector2 prevCamPosition = _camera.Position;
+
             _camera.Update(gameTime);
             _camera.Position = new Vector2(_currentMap.Player.Position.X, _currentMap.BackgroundRect.Y + 100);
+
+            if ((_camera.GetBounds().Left <= _currentMap.BackgroundRect.Left) || (_camera.GetBounds().Right >= _currentMap.BackgroundRect.Right))
+            {
+                _camera.Position = new Vector2(prevCamPosition.X, _currentMap.BackgroundRect.Y + 100);
+            }
+            else
+            {
+                _currentMap.ParallaxPosition.X = _currentMap.Player.Position.X - (_currentMap.ParallaxRect.Width / 2);
+            }
+
+            _currentMap.Update(gameTime);
         }
 
         public override void Update(GameTime gameTime)

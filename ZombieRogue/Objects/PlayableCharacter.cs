@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace ZombieRogue.Objects
     {
         public Vector2 PreviousMovement = new Vector2(1, 1);
 
+        private float PreviousDirection = 1;
+
         public float MoveSpeed = 1.0f;
 
         public float PreviousScale = 0.0f;
@@ -25,6 +28,8 @@ namespace ZombieRogue.Objects
         public bool IsAttacking = false;
 
         public bool IsUsingWeapon = false;
+
+        public bool WeaponIsThrown = false;
 
         public Weapon CurrentWeapon;
 
@@ -75,6 +80,9 @@ namespace ZombieRogue.Objects
             if (Movement != Vector2.Zero)
                 PreviousMovement = Movement;
 
+            if (Movement.X != 0)
+                PreviousDirection = Movement.X;
+
             Movement = new Vector2(0, 0);
 
             PreviousScale = Sprite.Scale;
@@ -97,14 +105,18 @@ namespace ZombieRogue.Objects
                 if (keyboardState.IsKeyDown(Keys.W))
                 {
                     Movement.Y = -(MoveSpeed / 2.25f);
+                    /*
                     if(Sprite.Scale > 0.850)
                         Sprite.Scale -= 0.002f;
+                    */
                 }
                 else if (keyboardState.IsKeyDown(Keys.S))
                 {
                     Movement.Y = MoveSpeed / 2.25f;
+                    /*
                     if(Sprite.Scale < 1.040)
                         Sprite.Scale += 0.002f;
+                    */
                 }
                 Sprite.Animation.IsLooping = true;
 
@@ -124,18 +136,18 @@ namespace ZombieRogue.Objects
         public void CombatInput(KeyboardState keyboardState)
         {
             var mouseState = Mouse.GetState();
-            IsUsingWeapon = false;
-
+            
             if (PreviousMouseState.LeftButton.Equals(ButtonState.Pressed) && mouseState.LeftButton.Equals(ButtonState.Released))
             {
                 IsAttacking = true;
                 Sprite.PlayAnimation(Spr_Punch);
                 Console.WriteLine($"Punch!");
             }
-            else if (PreviousMouseState.RightButton.Equals(ButtonState.Pressed) && mouseState.RightButton.Equals(ButtonState.Released))
+            else if (PreviousMouseState.RightButton.Equals(ButtonState.Pressed) && mouseState.RightButton.Equals(ButtonState.Released) && IsUsingWeapon.Equals(false))
             {
                 IsAttacking = true;
                 IsUsingWeapon = true;
+                WeaponIsThrown = true;
                 Sprite.PlayAnimation(Spr_Swing);
                 HandleWeaponAnimations(1);
                 Console.WriteLine($"Swing!");
@@ -145,7 +157,8 @@ namespace ZombieRogue.Objects
                 IsAttacking = true;
                 Sprite.PlayAnimation(Spr_Slam);
                 Console.WriteLine($"Slam!");
-            } else
+            }
+            else
             {
                 CurrentWeapon.Sprite.PlayAnimation(CurrentWeapon.Spr_Idle);
             }
@@ -171,7 +184,7 @@ namespace ZombieRogue.Objects
                         break;
                     case 1:
                         CurrentWeapon.Sprite.PlayAnimation(CurrentWeapon.Spr_Swing_Throw);
-                        ReturningProjectile p = new ReturningProjectile(Content, Position - new Vector2(0, 32), "Mjolnir", new int[] { 0 }, PreviousMovement)
+                        ReturningProjectile p = new ReturningProjectile(Content, Position - new Vector2(0, 32), "Mjolnir", new int[] { 0 }, new Vector2(PreviousDirection, 0))
                         {
                             IsFlipped = this.IsFlipped
                         };
@@ -180,6 +193,8 @@ namespace ZombieRogue.Objects
                         {
                             Console.WriteLine("Hammer Returned!");
                             Projectiles.RemoveAll(s => s.Equals(p));
+                            IsUsingWeapon = false;
+                            WeaponIsThrown = false;
                         };
                         break;
                 }
@@ -244,13 +259,14 @@ namespace ZombieRogue.Objects
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (IsUsingWeapon.Equals(true))
+            if (IsUsingWeapon.Equals(true) && WeaponIsThrown.Equals(false))
             {
                 base.Draw(gameTime, spriteBatch);
                 CurrentWeapon.Draw(gameTime, spriteBatch);
             } else
             {
-                CurrentWeapon.Draw(gameTime, spriteBatch);
+                if(WeaponIsThrown.Equals(false))
+                    CurrentWeapon.Draw(gameTime, spriteBatch);
                 base.Draw(gameTime, spriteBatch);
             }
 

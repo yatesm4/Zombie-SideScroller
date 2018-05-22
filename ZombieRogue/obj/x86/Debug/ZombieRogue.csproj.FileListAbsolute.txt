@@ -103,3 +103,6 @@ C:\_DEV\YESTERDAY_DEVELOPMENT\ZOMBIE_SCROLLER\Zombie-SideScroller\ZombieRogue\bi
 C:\_DEV\YESTERDAY_DEVELOPMENT\ZOMBIE_SCROLLER\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Content\Sprites\Weapons\Mjolnir\Swing\00.xnb
 C:\_DEV\YESTERDAY_DEVELOPMENT\ZOMBIE_SCROLLER\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Content\Sprites\Weapons\Mjolnir\Projectile\00.xnb
 C:\_DEV\YESTERDAY_DEVELOPMENT\ZOMBIE_SCROLLER\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Content\Sprites\Weapons\Mjolnir\Idle\00.xnb
+C:\_DEV\YESTERDAY_DEVELOPMENT\ZOMBIE_SCROLLER\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Content\Sprites\Environment\Backgrounds\01.xnb
+C:\_DEV\YESTERDAY_DEVELOPMENT\ZOMBIE_SCROLLER\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Content\Sprites\Characters\Walking\01.xnb
+C:\_DEV\YESTERDAY_DEVELOPMENT\ZOMBIE_SCROLLER\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Content\Sprites\Characters\Idle\01.xnb
