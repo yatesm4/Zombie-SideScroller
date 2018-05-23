@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Branding/YD_Logo.png</SourceFile>
-  <SourceTime>2018-04-25T11:37:20.7028289-04:00</SourceTime>
-  <DestFile>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/bin/Windows/Sprites/Branding/YD_Logo.xnb</DestFile>
-  <DestTime>2018-05-22T13:26:12.4261539-04:00</DestTime>
+  <SourceFile>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Branding/YD_Logo.png</SourceFile>
+  <SourceTime>2018-05-09T19:48:44.7227383-04:00</SourceTime>
+  <DestFile>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/bin/Windows/Sprites/Branding/YD_Logo.xnb</DestFile>
+  <DestTime>2018-05-22T18:31:56.2737337-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:05:36-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

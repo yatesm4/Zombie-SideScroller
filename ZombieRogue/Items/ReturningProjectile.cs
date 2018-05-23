@@ -117,9 +117,9 @@ namespace ZombieRogue.Items
 
                 foreach (var e in Entities)
                 {
-                    if (e.Hitbox.Intersects(Hitbox))
+                    if (e.Hitbox.Intersects(Hitbox) && e.IsDamaged.Equals(false))
                     {
-                        Console.WriteLine("Intersected with NPC");
+                        e.TakeDamage();
                     }
                 }
             }

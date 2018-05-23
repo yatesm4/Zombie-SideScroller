@@ -103,6 +103,16 @@ namespace ZombieRogue.Objects
             return;
         }
 
+        public async void TakeDamage()
+        {
+            Console.WriteLine("NPC took damage!");
+            IsDamaged = true;
+            TimeSpan t = new TimeSpan(25000000);
+            await Task.Delay(t);
+            IsDamaged = false;
+            return;
+        }
+
 
     }
 }

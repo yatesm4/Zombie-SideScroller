@@ -4,20 +4,20 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Idle/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Punch/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Slam/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Swing/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Uppercut/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Walking/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Branding/YD_Logo.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Environment/Backgrounds/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Idle/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Projectile/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Swing/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Swing_Throw/00.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Environment/Backgrounds/01.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Idle/01.png</File>
-    <File>C:/_SourceControl/SELF/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Walking/01.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Idle/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Punch/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Slam/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Swing/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Uppercut/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Walking/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Branding/YD_Logo.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Environment/Backgrounds/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Idle/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Projectile/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Swing/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Swing_Throw/00.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Environment/Backgrounds/01.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Idle/01.png</File>
+    <File>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Characters/Walking/01.png</File>
   </SourceFiles>
 </SourceFileCollection>
