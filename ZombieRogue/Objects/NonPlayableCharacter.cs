@@ -8,12 +8,17 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ZombieRogue.FX;
 using ZombieRogue.Items;
 
 namespace ZombieRogue.Objects
 {
     public class NonPlayableCharacter : Character
     {
+        private ContentManager Content;
+
+        private List<SpecialEffect> FXs = new List<SpecialEffect>();
+
         public Vector2 PreviousMovement = new Vector2(1,1);
 
         public Vector2 NewDirection = new Vector2();
@@ -26,6 +31,7 @@ namespace ZombieRogue.Objects
 
         public NonPlayableCharacter(ContentManager content, Vector2 position, int[] skin_args) : base(content, position, skin_args)
         {
+            Content = content;
             // construct playable char
             Sprite.AnimationEnded += Sprite_AnimationEnded;
         }
@@ -39,6 +45,25 @@ namespace ZombieRogue.Objects
                     DetermineMovement(map);
                 }
                 ApplyPhysics(map);
+            }
+
+            foreach (var fx in FXs)
+            {
+                if (fx.HasEnded.Equals(false))
+                {
+                    fx.Update(gameTime, keyboardState);
+                }
+            }
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            base.Draw(gameTime, spriteBatch);
+
+            foreach (var fx in FXs)
+            {
+                if(fx.HasEnded.Equals(false))
+                    fx.Draw(gameTime, spriteBatch);
             }
         }
 
@@ -107,9 +132,20 @@ namespace ZombieRogue.Objects
         {
             Console.WriteLine("NPC took damage!");
             IsDamaged = true;
+
+            Sprite.PlayAnimation(Spr_Slam);
+            Sprite.Animation.IsLooping = false;
+
+            var effect = new SpecialEffect(Content, new Vector2(Position.X, Position.Y - 18), "Kapow", 0.0f);
+            FXs.Add(effect);
+
             TimeSpan t = new TimeSpan(25000000);
             await Task.Delay(t);
+
             IsDamaged = false;
+            Sprite.PlayAnimation(Spr_Walk);
+            Sprite.Animation.IsLooping = true;
+
             return;
         }
 

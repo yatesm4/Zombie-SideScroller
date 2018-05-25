@@ -23,6 +23,8 @@ namespace ZombieRogue.Items
         public event EventHandler Returned;
         public bool IsReturned = false;
 
+        public float Duration = 0.0f;
+
         public bool IsDestroyed = false;
 
         public Vector2 Origin;
@@ -76,50 +78,45 @@ namespace ZombieRogue.Items
             {
                 if (IsReturned.Equals(false))
                 {
-                    Sprite.Rotation += 0.1f;
+                    Duration += 0.1f;
                     if (IsReturning.Equals(false))
                     {
-                        Position += new Vector2(Trajectory.X * ProjectileSpeed, 0);
-                        if (Sprite.Rotation > 5f)
+                        Position += new Vector2(Trajectory.X * ProjectileSpeed, (2.5f - (Duration * 1.5f)));
+                        if (Duration > 3f)
                         {
                             IsReturning = true;
+                            ProjectileSpeed = 2.5f;
+                        }
+                        else
+                        {
+                            ProjectileSpeed += 0.1f;
                         }
                     }
                     else
                     {
-                        Position -= new Vector2(Trajectory.X * ProjectileSpeed, 0);
-                        if (Trajectory.X > 0)
+                        var direction = owner.Position - Position;
+                        direction.Normalize();
+                        Position += direction * (ProjectileSpeed * 2);
+                        if (Hitbox.Intersects(owner.Hitbox))
                         {
-                            // thrown to right
-                            if (Position.X <= InitialPosition.X)
-                            {
-                                crossedReturningPoint = true;
-                            }
-                        }
-                        else
-                        {
-                            // thrown to left
-                            if (Position.X >= InitialPosition.X)
-                            {
-                                crossedReturningPoint = true;
-                            }
+                            crossedReturningPoint = true;
                         }
                         if (IsReturning.Equals(true) && crossedReturningPoint.Equals(true))
                         {
                             Console.WriteLine("Hammer returned to initial position");
-                            Sprite.Rotation = 0.0f;
+                            Duration = 0.0f;
                             IsReturned = true;
                             IsReturning = false;
                             Returned?.Invoke(this, new EventArgs());
                         }
                     }
-                }
 
-                foreach (var e in Entities)
-                {
-                    if (e.Hitbox.Intersects(Hitbox) && e.IsDamaged.Equals(false))
+                    foreach (var ent in Entities)
                     {
-                        e.TakeDamage();
+                        if (Hitbox.Intersects(ent.Hitbox) && ent.IsDamaged.Equals(false))
+                        {
+                            ent.TakeDamage();
+                        }
                     }
                 }
             }
@@ -169,7 +166,7 @@ namespace ZombieRogue.Items
             Debug_Rect.SetData(new[] { Color.Red });
 
             //spriteBatch.Draw(Debug_Rect, coords, new Color(color, 0.25f));
-            spriteBatch.Draw(Debug_Rect, new Vector2(Position.X, Position.Y), coords, new Color(color, 0.25f), Sprite.Rotation, HitboxOrigin, 1.0f, SpriteEffects.None, 0.0f);
+            spriteBatch.Draw(Debug_Rect, new Vector2(Position.X, Position.Y), coords, new Color(color, 0.25f), 0.0f, HitboxOrigin, 1.0f, SpriteEffects.None, 0.0f);
         }
     }
 }

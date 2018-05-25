@@ -17,6 +17,7 @@ namespace ZombieRogue.Objects
 {
     public class PlayableCharacter : Character
     {
+
         public Vector2 PreviousMovement = new Vector2(1, 1);
 
         private float PreviousDirection = 1;
@@ -146,6 +147,11 @@ namespace ZombieRogue.Objects
                 IsAttacking = true;
                 Sprite.PlayAnimation(Spr_Punch);
                 Console.WriteLine($"Punch!");
+                foreach (var ent in CurrentMapState.NPCs)
+                {
+                    if(Hitbox.Intersects(ent.Hitbox) && ent.IsDamaged.Equals(false))
+                        ent.TakeDamage();
+                }
             }
             else if (PreviousMouseState.RightButton.Equals(ButtonState.Pressed) && mouseState.RightButton.Equals(ButtonState.Released) && IsUsingWeapon.Equals(false))
             {

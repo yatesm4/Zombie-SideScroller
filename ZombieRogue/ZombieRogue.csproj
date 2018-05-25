@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FX\Effect.cs" />
     <Compile Include="GameInstance.cs" />
     <Compile Include="Items\Hammer.cs" />
     <Compile Include="Items\Projectile.cs" />

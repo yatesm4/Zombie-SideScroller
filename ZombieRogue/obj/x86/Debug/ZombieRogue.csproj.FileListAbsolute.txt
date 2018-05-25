@@ -113,3 +113,4 @@ C:\_SourceControl\SELF\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Con
 C:\_SourceControl\SELF\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Content\Sprites\Characters\Walking\01.xnb
 C:\_SourceControl\SELF\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Content\Sprites\Characters\Idle\01.xnb
 C:\_SourceControl\SELF\Zombie-SideScroller\ZombieRogue\obj\x86\Debug\ZombieRogue.csprojAssemblyReference.cache
+C:\_DEV\YESTERDAY_DEVELOPMENT\ZOMBIE_SCROLLER\Zombie-SideScroller\ZombieRogue\bin\Windows\x86\Debug\Content\Sprites\FX\Kapow.xnb
