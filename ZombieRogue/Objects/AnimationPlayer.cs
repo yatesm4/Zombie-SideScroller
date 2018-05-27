@@ -20,6 +20,11 @@ namespace ZombieRogue.Objects
         }
         Animation animation;
 
+        public Color DrawColor
+        {
+            get; set;
+        }
+
         /// <summary>
         /// Gets the index of the current frame in the animation.
         /// </summary>
@@ -70,6 +75,7 @@ namespace ZombieRogue.Objects
             {
                 Scale = 1.0f;
             }
+            DrawColor = Color.White;
         }
 
         /// <summary>
@@ -101,12 +107,12 @@ namespace ZombieRogue.Objects
                     }
                     else
                     {
+                        if ((frameIndex + 1) > Animation.FrameCount - 1)
+                        {
+                            AnimationEnded?.Invoke(this, new EventArgs());
+                        }
                         frameIndex = Math.Min(frameIndex + 1, Animation.FrameCount - 1);
                     }
-
-                    // if on the last frame, fire event
-                    if (frameIndex.Equals(Animation.FrameCount - 1))
-                        AnimationEnded?.Invoke(this, new EventArgs());
                 } else
                 {
                     frameIndex = 0;
@@ -117,7 +123,7 @@ namespace ZombieRogue.Objects
             Rectangle source = new Rectangle(FrameIndex * Animation.Texture.Height, 0, Animation.Texture.Height, Animation.Texture.Height);
 
             // Draw the current frame.
-            spriteBatch.Draw(Animation.Texture, position, source, Color.White, Rotation, Origin, Scale, spriteEffects, 0.0f);
+            spriteBatch.Draw(Animation.Texture, position, source, DrawColor, Rotation, Origin, Scale, spriteEffects, 0.0f);
         }
     }
 }

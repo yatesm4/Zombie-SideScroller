@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Idle/00.png</SourceFile>
-  <SourceTime>2018-05-22T18:29:11.2533466-04:00</SourceTime>
-  <DestFile>C:/_DEV/YESTERDAY_DEVELOPMENT/ZOMBIE_SCROLLER/Zombie-SideScroller/ZombieRogue/Content/bin/Windows/Sprites/Weapons/Mjolnir/Idle/00.xnb</DestFile>
-  <DestTime>2018-05-22T18:31:56.3317381-04:00</DestTime>
+  <SourceFile>C:/_DEV/YESTERDAY_DEV/Zombie-SideScroller/ZombieRogue/Content/Sprites/Weapons/Mjolnir/Idle/00.png</SourceFile>
+  <SourceTime>2018-05-26T08:37:04.1370977-04:00</SourceTime>
+  <DestFile>C:/_DEV/YESTERDAY_DEV/Zombie-SideScroller/ZombieRogue/Content/bin/Windows/Sprites/Weapons/Mjolnir/Idle/00.xnb</DestFile>
+  <DestTime>2018-05-27T11:17:20.2828989-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:05:36-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

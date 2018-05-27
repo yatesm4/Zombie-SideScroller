@@ -26,6 +26,8 @@ namespace ZombieRogue.Objects
 
         public float PreviousScale = 0.0f;
 
+        public bool IsRunning = false;
+
         public bool IsAttacking = false;
 
         public bool IsUsingWeapon = false;
@@ -68,8 +70,7 @@ namespace ZombieRogue.Objects
             {
                 CurrentWeapon.Position = Position;
                 CurrentWeapon.IsFlipped = IsFlipped;
-                CurrentWeapon.Sprite.Scale = Sprite.Scale;
-                CurrentWeapon.Update(gameTime, keyboardState, this);
+                //CurrentWeapon.Update(gameTime, keyboardState, this);
             }
 
             //Console.WriteLine($"Player Y: {Position.Y}; Scale: {Sprite.Scale}");
@@ -92,19 +93,19 @@ namespace ZombieRogue.Objects
 
             PreviousScale = Sprite.Scale;
 
+
             if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.D))
             {
                 Sprite.Animation.IsStill = false;
-                Sprite.PlayAnimation(Spr_Walk);
                 if (keyboardState.IsKeyDown(Keys.A))
                 {
                     Movement.X = -MoveSpeed;
-                    IsFlipped = true;
+                    IsFlipped = false;
                 }
                 else if (keyboardState.IsKeyDown(Keys.D))
                 {
                     Movement.X = MoveSpeed;
-                    IsFlipped = false;
+                    IsFlipped = true;
                 }
 
                 if (keyboardState.IsKeyDown(Keys.W))
@@ -124,15 +125,25 @@ namespace ZombieRogue.Objects
                     */
                 }
                 Sprite.Animation.IsLooping = true;
-
                 if (keyboardState.IsKeyDown(Keys.LeftShift) || keyboardState.IsKeyDown(Keys.RightShift))
                 {
-                    Movement = Movement * 1.25f;
+                    IsRunning = true;
+                    Movement = Movement * 2f;
+                    if(Sprite.Animation != Spr_Run)
+                    {
+                        Sprite.PlayAnimation(Spr_Run);
+                    }
+                } else
+                {
+                    IsRunning = false;
+                    if (Sprite.Animation != Spr_Walk)
+                        Sprite.PlayAnimation(Spr_Walk);
                 }
             }
             else
             {
-                Sprite.PlayAnimation(Spr_Idle);
+                if (Sprite.Animation != Spr_Walk)
+                    Sprite.PlayAnimation(Spr_Walk);
                 Sprite.Animation.IsLooping = false;
                 Sprite.Animation.IsStill = true;
             }
@@ -142,31 +153,32 @@ namespace ZombieRogue.Objects
         {
             var mouseState = Mouse.GetState();
             
-            if (PreviousMouseState.LeftButton.Equals(ButtonState.Pressed) && mouseState.LeftButton.Equals(ButtonState.Released))
+            if (PreviousKeyboardState.IsKeyDown(Keys.X) && keyboardState.IsKeyUp(Keys.X))
             {
                 IsAttacking = true;
                 Sprite.PlayAnimation(Spr_Punch);
                 Console.WriteLine($"Punch!");
-                foreach (var ent in CurrentMapState.NPCs)
-                {
-                    if(Hitbox.Intersects(ent.Hitbox) && ent.IsDamaged.Equals(false))
-                        ent.TakeDamage();
-                }
             }
-            else if (PreviousMouseState.RightButton.Equals(ButtonState.Pressed) && mouseState.RightButton.Equals(ButtonState.Released) && IsUsingWeapon.Equals(false))
+            else if (PreviousKeyboardState.IsKeyDown(Keys.Z) && keyboardState.IsKeyUp(Keys.Z))
             {
+                /*
                 IsAttacking = true;
                 IsUsingWeapon = true;
                 WeaponIsThrown = true;
-                Sprite.PlayAnimation(Spr_Swing);
+                Sprite.PlayAnimation(Spr_Punch);
                 HandleWeaponAnimations(1);
                 Console.WriteLine($"Swing!");
+                */
+                IsAttacking = true;
+                Sprite.PlayAnimation(Spr_Kick);
+                Console.WriteLine($"Kick!");
+
             }
-            else if (PreviousKeyboardState.IsKeyDown(Keys.F) && keyboardState.IsKeyUp(Keys.F))
+            else if (PreviousKeyboardState.IsKeyDown(Keys.C) && keyboardState.IsKeyUp(Keys.C))
             {
                 IsAttacking = true;
-                Sprite.PlayAnimation(Spr_Slam);
-                Console.WriteLine($"Slam!");
+                Sprite.PlayAnimation(Spr_Uppercut);
+                Console.WriteLine($"Uppercut!");
             }
             else
             {
@@ -177,6 +189,30 @@ namespace ZombieRogue.Objects
             {
                 Sprite.Animation.IsStill = false;
                 Sprite.Animation.IsLooping = false;
+
+                foreach (var ent in CurrentMapState.NPCs)
+                {
+                    if (Hitbox.Intersects(ent.Hitbox) && ent.IsDamaged.Equals(false))
+                    {
+                        if (IsFlipped.Equals(false))
+                        {
+                            // facing left
+                            if(ent.Position.X < Position.X)
+                            {
+                                // player is facing entity
+                                ent.TakeDamage();
+                            }
+                        } else
+                        {
+                            // facing right
+                            if (ent.Position.X > Position.X)
+                            {
+                                // player is facing entity
+                                ent.TakeDamage();
+                            }
+                        }
+                    }
+                }
             }
 
             PreviousMouseState = mouseState;
@@ -271,18 +307,23 @@ namespace ZombieRogue.Objects
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            /*
             if (IsUsingWeapon.Equals(true) && WeaponIsThrown.Equals(false))
             {
                 base.Draw(gameTime, spriteBatch);
-                CurrentWeapon.Draw(gameTime, spriteBatch);
+                //CurrentWeapon.Draw(gameTime, spriteBatch);
             } else
             {
                 if(WeaponIsThrown.Equals(false))
-                    CurrentWeapon.Draw(gameTime, spriteBatch);
+                    //CurrentWeapon.Draw(gameTime, spriteBatch);
                 base.Draw(gameTime, spriteBatch);
             }
+            */
 
-            for(int i=0; i < Projectiles.Count; i++)
+            base.Draw(gameTime, spriteBatch);
+
+
+            for (int i=0; i < Projectiles.Count; i++)
             {
                 Projectiles[i].Draw(gameTime, spriteBatch);
             }

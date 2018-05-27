@@ -81,25 +81,24 @@ namespace ZombieRogue.Objects
                 NewDirection.Normalize();
                 if (NewDirection.X > 0)
                 {
-                    IsFlipped = false;
+                    IsFlipped = true;
                 }
                 else if (NewDirection.X < 0)
                 {
-                    IsFlipped = true;
+                    IsFlipped = false;
                 }
             }
 
+            Sprite.PlayAnimation(Spr_Walk);
+
             if (NewDirection != Vector2.Zero)
             {
-                if(!Sprite.Animation.Equals(Spr_Walk))
-                    Sprite.PlayAnimation(Spr_Walk);
-
                 Sprite.Animation.IsStill = false;
                 Sprite.Animation.IsLooping = true;
             }
             else
             {
-                Sprite.PlayAnimation(Spr_Idle);
+                Sprite.FrameIndex = 1;
                 Sprite.Animation.IsStill = true;
                 Sprite.Animation.IsLooping = false;
             }
@@ -109,6 +108,25 @@ namespace ZombieRogue.Objects
         {
             Vector2 PreviousPosition = Position;
             Position += NewDirection * MoveSpeed;
+
+            // check new position for clearance
+            foreach(var ent in map.NPCs)
+            {
+                Console.WriteLine("NPC movement blocked by other NPC's hitbox.");
+                if (object.ReferenceEquals(ent, this))
+                    continue;
+
+                if (ent.Hitbox.Intersects(Hitbox) && TestRange((int)Position.Y, (int)ent.Position.Y - 5, (int)ent.Position.Y + 5))
+                {
+                    Position = PreviousPosition;
+                }
+
+            }
+        }
+
+        private bool TestRange(int numberToCheck, int bottom, int top)
+        {
+            return (numberToCheck >= bottom && numberToCheck <= top);
         }
 
         public void Sprite_AnimationEnded(object sender, EventArgs e)
@@ -133,8 +151,8 @@ namespace ZombieRogue.Objects
             Console.WriteLine("NPC took damage!");
             IsDamaged = true;
 
-            Sprite.PlayAnimation(Spr_Slam);
-            Sprite.Animation.IsLooping = false;
+            //Sprite.PlayAnimation(Spr_);
+            //Sprite.Animation.IsLooping = false;
 
             var effect = new SpecialEffect(Content, new Vector2(Position.X, Position.Y - 18), "Kapow", 0.0f);
             FXs.Add(effect);

@@ -35,19 +35,47 @@ namespace ZombieRogue.Objects
             _parallaxBackground = content.Load<Texture2D>("Sprites/Environment/Backgrounds/01");
 
             _backgroundPosition = new Vector2(graphicsDevice.Viewport.Width / 2, graphicsDevice.Viewport.Height / 2);
-            ParallaxPosition = _backgroundPosition;
+            ParallaxPosition = _backgroundPosition + new Vector2(0, -100);
+            ParallaxRect = new Rectangle(new Point((int)ParallaxPosition.X, (int)ParallaxPosition.Y), new Point(_background.Width, _background.Height));
+
 
             BackgroundRect = new Rectangle(new Point((int)_backgroundPosition.X, (int)_backgroundPosition.Y), new Point(_background.Width, _background.Height));
 
+            /**
+             * ADD PLAYER
+             **/
+
             Player = new PlayableCharacter(content,
                 new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2), BackgroundRect.Y + 200),
-                new int[] {0, 0, 0, 0, 0, 0})
+                new int[] {1, 1, 1, 1, 1, 1})
             {
                 GraphDevice = graphicsDevice,
                 IsDebugging = true
             };
 
-            NPCs.Add(new NonPlayableCharacter(content, new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2) + 80, BackgroundRect.Y + 200), new int[] { 1, 1, 0, 0, 0, 0 })
+            /**
+             * ADD NPCs
+             **/
+
+            NPCs.Add(new NonPlayableCharacter(content, new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2) + 200, BackgroundRect.Y + 200), new int[] { 2, 2, 2, 0, 0, 0 })
+            {
+                GraphDevice = graphicsDevice,
+                IsDebugging = true
+            });
+
+            NPCs.Add(new NonPlayableCharacter(content, new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2) + 80, BackgroundRect.Y + 200), new int[] { 2, 2, 2, 0, 0, 0 })
+            {
+                GraphDevice = graphicsDevice,
+                IsDebugging = true
+            });
+
+            NPCs.Add(new NonPlayableCharacter(content, new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2) - 80, BackgroundRect.Y + 200), new int[] { 2, 2, 2, 0, 0, 0 })
+            {
+                GraphDevice = graphicsDevice,
+                IsDebugging = true
+            });
+
+            NPCs.Add(new NonPlayableCharacter(content, new Vector2(BackgroundRect.X + (BackgroundRect.Width / 2) - 200, BackgroundRect.Y + 200), new int[] { 2, 2, 2, 0, 0, 0 })
             {
                 GraphDevice = graphicsDevice,
                 IsDebugging = true
@@ -61,7 +89,6 @@ namespace ZombieRogue.Objects
             {
                 n.Update(gameTime, Keyboard.GetState(), this);
             }
-            ParallaxRect = new Rectangle(new Point((int)ParallaxPosition.X, (int)ParallaxPosition.Y), new Point(_background.Width, _background.Height));
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

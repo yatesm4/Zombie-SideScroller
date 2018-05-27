@@ -18,11 +18,10 @@ namespace ZombieRogue.Objects
         public ContentManager Content;
         public GraphicsDevice GraphDevice;
 
-        public Animation Spr_Idle;
         public Animation Spr_Walk;
+        public Animation Spr_Run;
         public Animation Spr_Punch;
-        public Animation Spr_Swing;
-        public Animation Spr_Slam;
+        public Animation Spr_Kick;
         public Animation Spr_Uppercut;
 
         public AnimationPlayer Sprite;
@@ -42,7 +41,7 @@ namespace ZombieRogue.Objects
         public Vector2 Movement;
         public Vector2 Velocity;
 
-        public const float MoveAcceleration = 8000.0f;
+        public const float MoveAcceleration = 4000.0f;
         public const float MaxMoveSpeed = 500.0f;
         public const float GroundDragFactor = 0.48f;
         public const float AirDragFactor = 0.58f;
@@ -64,7 +63,7 @@ namespace ZombieRogue.Objects
         {
             get
             {
-                return new Rectangle((int)Position.X - (localBounds.Width / 2), (int)Position.Y - localBounds.Height, localBounds.Width, localBounds.Height - (localBounds.Height / 4));
+                return new Rectangle((int)Position.X - (localBounds.Width / 2), (int)Position.Y - localBounds.Height, localBounds.Width, localBounds.Height);
             }
         }
 
@@ -77,17 +76,16 @@ namespace ZombieRogue.Objects
 
         public void LoadContent(ContentManager content, int[] skin_args)
         {
-            Spr_Idle = new Animation(content.Load<Texture2D>($"Sprites/Characters/Idle/0{skin_args[0]}"), 0.075f, true);
-            Spr_Walk = new Animation(content.Load<Texture2D>($"Sprites/Characters/Walking/0{skin_args[1]}"), 0.075f, true);
-            Spr_Punch = new Animation(content.Load<Texture2D>($"Sprites/Characters/Punch/0{skin_args[2]}"), 0.1f, true);
-            Spr_Swing = new Animation(content.Load<Texture2D>($"Sprites/Characters/Swing/0{skin_args[3]}"), 0.15f, true);
-            Spr_Slam = new Animation(content.Load<Texture2D>($"Sprites/Characters/Slam/0{skin_args[4]}"), 0.15f, true);
-            Spr_Uppercut = new Animation(content.Load<Texture2D>($"Sprites/Characters/Uppercut/0{skin_args[5]}"), 0.3f, true);
+            Spr_Run = new Animation(content.Load<Texture2D>($"Sprites/Characters/Run/0{skin_args[0]}"), 0.25f, true);
+            Spr_Walk = new Animation(content.Load<Texture2D>($"Sprites/Characters/Walk/0{skin_args[1]}"), 0.2f, true);
+            Spr_Punch = new Animation(content.Load<Texture2D>($"Sprites/Characters/Punch/0{skin_args[2]}"), 0.15f, true);
+            Spr_Kick = new Animation(content.Load<Texture2D>($"Sprites/Characters/Kick/0{skin_args[3]}"), 0.15f, true);
+            Spr_Uppercut = new Animation(content.Load<Texture2D>($"Sprites/Characters/Uppercut/0{skin_args[5]}"), 0.4f, true);
 
-            int width = (int)(Spr_Idle.FrameWidth * 0.4);
-            int left = (Spr_Idle.FrameWidth - width) / 2;
-            int height = (int)(Spr_Idle.FrameWidth * 0.8);
-            int top = Spr_Idle.FrameHeight - height;
+            int width = (int)(Spr_Walk.FrameWidth * 0.6);
+            int left = (Spr_Walk.FrameWidth - width);
+            int height = (int)(Spr_Walk.FrameWidth);
+            int top = Spr_Walk.FrameHeight - height;
             localBounds = new Rectangle(left, top, width, height);
         }
 
@@ -95,7 +93,7 @@ namespace ZombieRogue.Objects
         {
             Position = reset_position;
             Velocity = Vector2.Zero;
-            Sprite.PlayAnimation(Spr_Idle);
+            Sprite.PlayAnimation(Spr_Walk);
         }
 
         public abstract void Update(GameTime gameTime, KeyboardState keyboardState, Map map);
@@ -111,7 +109,7 @@ namespace ZombieRogue.Objects
             if (IsDebugging.Equals(true))
             {
                 // draw characters hitbox
-                DrawDebugRect(Hitbox, Color.Red, spriteBatch);
+                //DrawDebugRect(Hitbox, Color.Red, spriteBatch);
             }
         }
 
